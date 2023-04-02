@@ -34,7 +34,7 @@ echo "Product ID: $product_id" >> sample.txt
 echo "Installed Software:" >> sample.txt
 echo "---------------------------------------------" >> sample.txt
 echo >> sample.txt
-dpkg-query -l >> sample.txt
+rpm -qa >> sample.txt
 echo >> sample.txt
 
 # List current running processes
