@@ -1,0 +1,45 @@
+# Gather system information
+echo "System Information:" > sample.txt
+echo "---------------------------------------------" >> sample.txt
+echo >> sample.txt
+uname -a >> sample.txt
+echo >> sample.txt
+cat /etc/os-release >> sample.txt
+echo >> sample.txt
+df -h >> sample.txt
+ls -l /sys/firmware/acpi/tables/ >> sample.txt
+echo >> sample.txt
+
+# Display Windows product key and ID 
+# Check if running as root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+# Get product key
+product_key=$(dmidecode -s system-uuid)
+
+# Get product ID
+product_id=$(dmidecode -s system-product-name)
+
+# Output results to console
+echo "Product Key: $product_key"
+echo "Product ID: $product_id"
+
+# Save results to file
+echo "Product Key: $product_key" > sample.txt
+echo "Product ID: $product_id" >> sample.txt
+# List installed software
+echo "Installed Software:" >> sample.txt
+echo "---------------------------------------------" >> sample.txt
+echo >> sample.txt
+dpkg-query -l >> sample.txt
+echo >> sample.txt
+
+# List current running processes
+echo "Running Processes:" >> sample.txt
+echo "---------------------------------------------" >> sample.txt
+echo >> sample.txt
+ps aux >> sample.txt
+echo >> sample.txt
